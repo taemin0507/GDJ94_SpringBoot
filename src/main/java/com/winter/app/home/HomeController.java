@@ -11,7 +11,7 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String index()throws Exception{
-		log.info("index controller");
+		log.info("index contorller");
 		return "index";
 	}
 }
