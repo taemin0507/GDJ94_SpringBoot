@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/template/head.jsp"></c:import>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.css" rel="stylesheet">
+    
 </head>
 <body id="page-top">
 	<div id="wrapper">
@@ -27,16 +29,42 @@
                 <div class="container-fluid">
                 	<!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Index</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Add Form</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
                     
                     <!-- Content Row -->
-                    <div class="row">
-                    
-                    <!-- 생성한 contents 작성 -->
-                    
+                    <div class="row justify-content-center mt-5">
+                    <div class="col-lg-6 mt-5">
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Board Add</h6>
+                                </div>
+                                <div class="card-body">
+                                   <form method="post">
+									  <div class="form-group">
+									    <label for="writer">Writer</label>
+									    <input type="text" class="form-control" id="writer" name="boardWriter" aria-describedby="emailHelp">
+									  </div>
+									  <div class="form-group">
+									    <label for="title">Title</label>
+									    <input type="text" class="form-control" name="boardTitle" id="title">
+									  </div>
+									  
+									  <div class="form-group">
+									    <label for="contents">Contents</label>
+									    <textarea class="form-control" name="boardContents" id="contents" rows="3"></textarea>
+									  </div>
+									
+									  <button type="submit" class="btn btn-primary">Submit</button>
+									</form>
+                                </div>
+                             </div>
+                             
+                     </div>           
+                                        
                     </div>
                 
                 </div>
@@ -57,6 +85,11 @@
 	
 	</div>
 	
-<c:import url="/WEB-INF/views/template/foot.jsp"></c:import>	
+<c:import url="/WEB-INF/views/template/foot.jsp"></c:import>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.js"></script>	
+<script type="text/javascript">
+	$("#contents").summernote()
+</script>
+
 </body>
 </html>

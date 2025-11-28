@@ -1,25 +1,24 @@
 package com.winter.app.board.notice;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.winter.app.util.Pager;
+
 @Mapper
 public interface NoticeDAO {
-
-	// 상세
-	public NoticeDTO detail(NoticeDTO noticeDTO) throws Exception;
 	
-	// 추가
+	public Long count(Pager pager)throws Exception;
+	
+	public List<NoticeDTO> list (Pager pager)throws Exception;
+	
+	public NoticeDTO detail(NoticeDTO noticeDTO)throws Exception;
+
 	public int add(NoticeDTO noticeDTO)throws Exception;
 	
-	// 삭제
-	public int delete(NoticeDTO noticeDTO) throws Exception;
+	public int update(NoticeDTO noticeDTO)throws Exception;
 	
-	// 업데이트
-	public int update(Map<String, Object> map) throws Exception;
-	
-	// 리스트
-	public List<NoticeDTO> list()throws Exception;
+	public int delete(NoticeDTO noticeDTO)throws Exception;
+
 }
