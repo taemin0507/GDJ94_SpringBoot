@@ -27,7 +27,7 @@
                 <div class="container-fluid">
                 	<!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Detail</h1>
+                        <h1 class="h3 mb-0 text-gray-800">${category} Detail</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
@@ -42,6 +42,18 @@
                                 </div>
                                 <div class="card-body">
                                    ${dto.boardContents}
+                                </div>
+                                
+                                <div class="card-footer">
+                                	<c:if test="${category ne 'Notice'}">
+                                	<a href="./reply?boardNum=${dto.boardNum}" class="btn btn-danger">답글</a>
+                                	</c:if>
+                                	
+                                	<a href="./update?boardNum=${dto.boardNum}" class="btn btn-primary">Update</a>
+                                	<form action="./delete" method="post">
+                                		<input type="hidden" name="boardNum" value="${dto.boardNum}">
+                                		<button id="del" class="btn btn-danger">Delete</button>
+                                	</form>
                                 </div>
                              </div>
                              

@@ -5,35 +5,66 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.winter.app.board.BoardDTO;
+import com.winter.app.board.BoardService;
 import com.winter.app.util.Pager;
+
 @Service
-public class QnaService {
+public class QnaService implements BoardService {
+	
 	@Autowired
 	private QnaDAO qnaDAO;
-	
-	public List<QnaDTO> list (Pager pager)throws Exception{
-		//1. totalCount 구하기
-		Long totalCount= qnaDAO.count(pager);
-		
-		pager.pageing(totalCount);
 
+	@Override
+	public List<BoardDTO> list(Pager pager) throws Exception {
+		pager.pageing(qnaDAO.count(pager));
+		
 		
 		return qnaDAO.list(pager);
 	}
-	
-	public QnaDTO detail(QnaDTO qnaDTO)throws Exception{
-		return qnaDAO.detail(qnaDTO);
+
+	@Override
+	public BoardDTO detail(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return qnaDAO.detail(boardDTO);
+	}
+
+	@Override
+	public int add(BoardDTO boardDTO) throws Exception {
+		int result = qnaDAO.add(boardDTO);
+		qnaDAO.refUpdate(boardDTO);
+		return result;
+	}
+
+	@Override
+	public int update(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return qnaDAO.update(boardDTO);
+	}
+
+	@Override
+	public int delete(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return qnaDAO.delete(boardDTO);
 	}
 	
-	public int add(QnaDTO qnaDTO)throws Exception{
-		return qnaDAO.add(qnaDTO);
+	public int reply(QnaDTO qnaDTO)throws Exception{
+		//1. 부모의 정보를 조회
+		QnaDTO parent=(QnaDTO)qnaDAO.detail(qnaDTO);
+		//2. 부모의 정보를 이용해서 step을 업데이트
+		int result = qnaDAO.stepUpdate(parent);
+		//3. 부모의 정보를 이용해서 ref, step, depth를 세팅
+		qnaDTO.setBoardRef(parent.getBoardRef());
+		qnaDTO.setBoardStep(parent.getBoardStep()+1);
+		qnaDTO.setBoardDepth(parent.getBoardDepth()+1);
+		//4. insert
+		result=qnaDAO.add(qnaDTO);
+		
+		return result;
 	}
 	
-	public int update(QnaDTO qnaDTO)throws Exception{
-		return qnaDAO.update(qnaDTO);
-	}
 	
-	public int delete(QnaDTO qnaDTO)throws Exception{
-		return qnaDAO.delete(qnaDTO);
-	}
+	
+	
+
 }
