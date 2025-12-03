@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/template/head.jsp"></c:import>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.css" rel="stylesheet">
+    
 </head>
 <body id="page-top">
 	<div id="wrapper">
@@ -27,7 +29,7 @@
                 <div class="container-fluid">
                 	<!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">${category} Detail</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Add Form</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
@@ -38,33 +40,46 @@
 
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Board Contents</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">${category}</h6>
                                 </div>
                                 <div class="card-body">
-                                   ${dto.boardContents}
-                                   
-                                   
-                                </div>
-                                
-                                <div>
-                                	<c:forEach items="${dto.fileDTOs}" var="file">
-                                		<div>
-                                		<%-- 	<a href="/files/${category}/${file.fileName}">${file.fileOrigin}</a> --%>
-                                		<a href="./fileDown?fileNum=${file.fileNum}">${file.fileOrigin}</a>
-                                		</div>
-                                	</c:forEach>
-                                </div>
-                                
-                                <div class="card-footer">
-                                	<c:if test="${category ne 'notice'}">
-                                	<a href="./reply?boardNum=${dto.boardNum}" class="btn btn-danger">답글</a>
-                                	</c:if>
-                                	
-                                	<a href="./update?boardNum=${dto.boardNum}" class="btn btn-primary">Update</a>
-                                	<form action="./delete" method="post">
-                                		<input type="hidden" name="boardNum" value="${dto.boardNum}">
-                                		<button id="del" class="btn btn-danger">Delete</button>
-                                	</form>
+                                   <form method="post" enctype="multipart/form-data">
+                                   	  
+									  <div class="form-group">
+									    <label for="writer">Username</label>
+									    <input type="text" class="form-control"  id="username" name="username">
+									  </div>
+									  <div class="form-group">
+									    <label for="password">Password</label>
+									    <input type="password" class="form-control"  id="password" name="password">
+									  </div>									  
+									  <div class="form-group">
+									    <label for="name">Name</label>
+									    <input type="text" class="form-control" name="name" id="name">
+									  </div>
+									  <div class="form-group">
+									    <label for="email">Email</label>
+									    <input type="email" class="form-control" name="email" id="email">
+									  </div>									  
+									  <div class="form-group">
+									    <label for="phone">Phone</label>
+									    <input type="text" class="form-control" name="phone" id="phone">
+									  </div>									  
+									  <div class="form-group">
+									    <label for="birth">Birth</label>
+									    <input type="date" class="form-control" name="birth" id="birth">
+									  </div>									  
+									  <div class="form-group">
+									  	<button type="button" id="fileAdd"  class="form-control btn btn-primary" >File Add</button>
+									  	
+									  </div>
+									  
+									  <div id="files" class="form-group">
+									  
+									  </div>
+									
+									  <button type="submit" class="btn btn-primary">Submit</button>
+									</form>
                                 </div>
                              </div>
                              
@@ -90,6 +105,12 @@
 	
 	</div>
 	
-<c:import url="/WEB-INF/views/template/foot.jsp"></c:import>	
+<c:import url="/WEB-INF/views/template/foot.jsp"></c:import>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.js"></script>	
+<script type="text/javascript">
+	$("#contents").summernote()
+</script>
+<script type="text/javascript" src="/js/board/board.js"></script>
+
 </body>
 </html>

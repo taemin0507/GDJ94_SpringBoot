@@ -42,6 +42,7 @@ public class NoticeService implements BoardService {
 	
 	@Override
 	public BoardDTO detail(BoardDTO boardDTO)throws Exception{
+		
 		return noticeDAO.detail(boardDTO);
 	}
 	@Override
@@ -64,7 +65,7 @@ public class NoticeService implements BoardService {
 			}
 			String fileName = fileManager.fileSave(file, f);
 			//4. 정보를 DB에 저장
-			BoardFileDTO boardFileDTO = new NoticeFileDTO();
+			BoardFileDTO boardFileDTO = new BoardFileDTO();
 			boardFileDTO.setFileName(fileName);
 			boardFileDTO.setFileOrigin(f.getOriginalFilename());
 			boardFileDTO.setBoardNum(boardDTO.getBoardNum());
@@ -80,7 +81,24 @@ public class NoticeService implements BoardService {
 	}
 	@Override
 	public int delete(BoardDTO boardDTO)throws Exception{
+		boardDTO = noticeDAO.detail(boardDTO);
+		//HDD에서 파일을 삭제
+		if(boardDTO.getFileDTOs() != null) {
+			for(BoardFileDTO boardFileDTO:boardDTO.getFileDTOs()) {
+				File file = new File(uploadPath, boardFileDTO.getFileName());
+				boolean flag = fileManager.fileDelete(file);
+				
+			}
+		}
+		
+		//---------------
+		int result = noticeDAO.fileDelete(boardDTO);
 		return noticeDAO.delete(boardDTO);
 	}
 	
+	@Override
+	public BoardFileDTO fileDetail(BoardFileDTO boardFileDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return noticeDAO.fileDetail(boardFileDTO);
+	}
 }

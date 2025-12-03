@@ -10,6 +10,14 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class FileManager {
 	
+	public boolean fileDelete(File file)throws Exception{
+		//1. 어느 경로에 어떤파일명을 지울것인가?
+		return file.delete();
+	}
+	
+	
+	
+	
 	//TDD
 	public String fileSave(File file, MultipartFile f)throws Exception{
 		if(!file.exists()) {

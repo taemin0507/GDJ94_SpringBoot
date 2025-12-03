@@ -41,24 +41,13 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Board Contents</h6>
                                 </div>
                                 <div class="card-body">
-                                   ${dto.boardContents}
-                                   
-                                   
-                                </div>
-                                
-                                <div>
-                                	<c:forEach items="${dto.fileDTOs}" var="file">
-                                		<div>
-                                		<%-- 	<a href="/files/${category}/${file.fileName}">${file.fileOrigin}</a> --%>
-                                		<a href="./fileDown?fileNum=${file.fileNum}">${file.fileOrigin}</a>
-                                		</div>
-                                	</c:forEach>
+                                   <img src="/files/${category}/${user.userFileDTO.fileName}">
+                                   <h3>${user.username}</h3>
+                                   <h3>${user.email}</h3>
+                                   <h3>${user.birth}</h3>
                                 </div>
                                 
                                 <div class="card-footer">
-                                	<c:if test="${category ne 'notice'}">
-                                	<a href="./reply?boardNum=${dto.boardNum}" class="btn btn-danger">답글</a>
-                                	</c:if>
                                 	
                                 	<a href="./update?boardNum=${dto.boardNum}" class="btn btn-primary">Update</a>
                                 	<form action="./delete" method="post">
