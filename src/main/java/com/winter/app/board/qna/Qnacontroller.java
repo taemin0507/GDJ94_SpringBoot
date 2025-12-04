@@ -112,13 +112,12 @@ public class QnaController {
 		
 		return "redirect:./list";
 	}
-
+	
 	@GetMapping("fileDown")
-	public void fileDown(BoardFileDTO boardFileDTO) throws Exception{
+	public void fileDown(BoardFileDTO boardFileDTO)throws Exception{
 		boardFileDTO = qnaService.fileDetail(boardFileDTO);
-	}
-	
-	
+	}	
+
 }
 
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>    
+<%@ taglib prefix="c" uri="jakarta.tags.core" %> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,20 +44,24 @@
                                     <h6 class="m-0 font-weight-bold text-primary">${category} ${sub}</h6>
                                 </div>
                                 <div class="card-body">
-                                   <form method="post" enctype="multipart/form-data">
-                                   	  <input type="hidden" name="boardNum" value="${dto.boardNum}">
+                                
+              <!--------------------- Form ------------------- -->
+              						<form:form modelAttribute="dto" method="post" enctype="multipart/form-data">
+                                   	  <form:hidden path="boardNum"/>
+                                   	 
 									  <div class="form-group">
 									    <label for="writer">Writer</label>
-									    <input type="text" class="form-control" value="${dto.boardWriter}" id="writer" name="boardWriter" aria-describedby="emailHelp">
+									    <form:input path="boardWriter" cssClass="form-control" id="writer"/>
 									  </div>
 									  <div class="form-group">
 									    <label for="title">Title</label>
-									    <input type="text" class="form-control" value="${dto.boardTitle}" name="boardTitle" id="title">
+									    <form:input path="boardTitle" cssClass="form-control" id="title"/>
+									  	<form:errors path="boardTitle"></form:errors>
 									  </div>
 									  
 									  <div class="form-group">
 									    <label for="contents">Contents</label>
-									    <textarea class="form-control" name="boardContents" id="contents" rows="3">${dto.boardContents}</textarea>
+									    <form:textarea path="boardContents" cssClass="form-control" id="contents" rows="8"/>
 									  </div>
 									  
 									  <div class="form-group">
@@ -69,7 +74,7 @@
 									  </div>
 									
 									  <button type="submit" class="btn btn-primary">Submit</button>
-									</form>
+									</form:form> 
                                 </div>
                              </div>
                              

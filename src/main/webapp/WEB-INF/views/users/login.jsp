@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %> 
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>   
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/template/head.jsp"></c:import>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.css" rel="stylesheet">
+    
 </head>
 <body id="page-top">
 	<div id="wrapper">
@@ -28,33 +29,40 @@
                 <div class="container-fluid">
                 	<!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Index</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Add Form</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
                     
                     <!-- Content Row -->
-                    <div class="row">
-                    <div>
-                    <spring:message code="hi"></spring:message>
-                    <spring:message code="hello" text="키가없을때 기본 메세지"></spring:message>
+                    <div class="row justify-content-center mt-5">
+                    <div class="col-lg-6 mt-5">
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">${category}</h6>
+                                </div>
+                                <div class="card-body">
+                                   <form method="post">
+                                   	  
+									  <div class="form-group">
+									    <label for="writer">Username</label>
+									    <input type="text" class="form-control"  id="username" name="username">
+									  </div>
+									  <div class="form-group">
+									    <label for="password">Password</label>
+									    <input type="password" class="form-control"  id="password" name="password">
+									  </div>									  
+									 
+									
+									  <button type="submit" class="btn btn-primary">Submit</button>
+									</form>
+                                </div>
+                             </div>
+                             
+                     </div>           
+                                        
                     </div>
-                    
-                    <!-- 생성한 contents 작성 -->
-                    <c:if test="${not empty user}">
-                    	<h1>Login 성공</h1>
-                    	<spring:message code="message.welcome" arguments="${user.username},${user.birth}" argumentSeparator="," var="m"></spring:message>
-                    	<hr />
-                    	<h3>${m}</h3>
-                    </c:if>
-                    
-                    <c:if test="${empty user}">
-                    	<h1>Login 필요</h1>
-                    </c:if>
-                    
-                    </div>
-                    
-                    
                 
                 </div>
                 <!-- /.container-fluid -->
@@ -74,7 +82,12 @@
 	
 	</div>
 	
-<c:import url="/WEB-INF/views/template/foot.jsp"></c:import>	
-<script src="/js/index/index.js"></script>
+<c:import url="/WEB-INF/views/template/foot.jsp"></c:import>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.js"></script>	
+<script type="text/javascript">
+	$("#contents").summernote()
+</script>
+<script type="text/javascript" src="/js/board/board.js"></script>
+
 </body>
 </html>

@@ -9,11 +9,11 @@
 		</insert>
 		
 		<insert id="userFileAdd" parameterType="UserFileDTO">
-			INSERT INTO profile (file_name, file_origin, username) 
-			values (#{fileName}, #{fileOrigin}, #{username})
+			INSERT INTO profile (file_name, file_origin, username)
+			(#{fileName}, #{fileOrigin}, #{username})
 		</insert>
     	
-    	<select id="detail" resultMap="detailResult" parameterType="QnaDTO">
+    	<select id="detail" resultMap="detailResult" parameterType="UserDTO">
     		SELECT *
 			FROM users U
 				 LEFT JOIN
@@ -36,6 +36,22 @@
     		</association>
     	</resultMap>
 
+		<update id="update" parameterType="UserDTO">
+			UPDATE users
+			<set>
+				name=#{name},
+				<if test="email != null">
+				email=#{email},
+				</if>
+				<if test="phone != null">
+				phone=#{phone},
+				</if>
+				<if test="birth != null">
+				birth=#{birth}
+				</if>			
+			</set>
+			WHERE username=#{username}
+		</update>
     	
 
     

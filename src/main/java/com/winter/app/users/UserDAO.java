@@ -7,6 +7,8 @@ public interface UserDAO {
 	
 	public int register(UserDTO userDTO)throws Exception;
 	public int userFileAdd(UserFileDTO userFileDTO)throws Exception;
-	public UserDTO detail(String username)throws Exception;
+	public UserDTO detail(UserDTO userDTO)throws Exception;
+	
+	public int update(UserDTO userDTO)throws Exception;
 
 }

@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>    
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>   
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/template/head.jsp"></c:import>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.css" rel="stylesheet">
+    
 </head>
 <body id="page-top">
 	<div id="wrapper">
@@ -27,7 +30,7 @@
                 <div class="container-fluid">
                 	<!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">${category} Detail</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Add Form</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
@@ -38,19 +41,29 @@
 
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Board Contents</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">${category}</h6>
                                 </div>
                                 <div class="card-body">
-                                   <img src="/files/${category}/${user.userFileDTO.fileName}">
-                                   <h3>${user.username}</h3>
-                                   <h3>${user.email}</h3>
-                                   <h3>${user.birth}</h3>
-                                </div>
-                                
-                                <div class="card-footer">
-                                	
-                                	<a href="./update" class="btn btn-primary">Update</a>
-									<a href="./change" class="btn btn-danger">비번변경</a>
+                                   <form:form method="post" modelAttribute="userDTO" enctype="multipart/form-data">	
+									  <div class="form-group">
+									    <label for="password">기존 Password</label>
+									    <input type="password" class="form-control" name="exist">
+									    
+									  	
+									  </div>						
+									  <div class="form-group">
+									    <label for="password">새로운 Password</label>
+									    <form:password path="password" cssClass="form-control"  id="password"/>
+									  	<form:errors path="password"></form:errors>
+									  </div>
+									  <div class="form-group">
+									    <label for="password">새로운 Password</label>
+									    <form:password path="passwordCheck" cssClass="form-control"  id="passwordCheck"/>
+									  	<form:errors path="passwordCheck"></form:errors>
+									  </div>									  
+									 
+									  <button type="submit" class="btn btn-primary">Submit</button>
+									</form:form>
                                 </div>
                              </div>
                              
@@ -76,6 +89,12 @@
 	
 	</div>
 	
-<c:import url="/WEB-INF/views/template/foot.jsp"></c:import>	
+<c:import url="/WEB-INF/views/template/foot.jsp"></c:import>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.js"></script>	
+<script type="text/javascript">
+	$("#contents").summernote()
+</script>
+<script type="text/javascript" src="/js/board/board.js"></script>
+
 </body>
 </html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>    
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>   
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,31 +44,41 @@
                                     <h6 class="m-0 font-weight-bold text-primary">${category}</h6>
                                 </div>
                                 <div class="card-body">
-                                   <form method="post" enctype="multipart/form-data">
-                                   	  
+                                   <form:form method="post" modelAttribute="userDTO" enctype="multipart/form-data">	
 									  <div class="form-group">
 									    <label for="writer">Username</label>
-									    <input type="text" class="form-control"  id="username" name="username">
+									    <form:input path="username" cssClass="form-control"  id="username"/>
+									    <form:errors path="username"></form:errors>
 									  </div>
 									  <div class="form-group">
 									    <label for="password">Password</label>
-									    <input type="password" class="form-control"  id="password" name="password">
+									    <form:password path="password" cssClass="form-control"  id="password"/>
+									  	<form:errors path="password"></form:errors>
+									  </div>
+									  <div class="form-group">
+									    <label for="password">Password</label>
+									    <form:password path="passwordCheck" cssClass="form-control"  id="passwordCheck"/>
+									  	<form:errors path="passwordCheck"></form:errors>
 									  </div>									  
 									  <div class="form-group">
 									    <label for="name">Name</label>
-									    <input type="text" class="form-control" name="name" id="name">
+									    <form:input path="name" cssClass="form-control"  id="name"/>
+									  	<form:errors path="name"></form:errors>
 									  </div>
 									  <div class="form-group">
 									    <label for="email">Email</label>
-									    <input type="email" class="form-control" name="email" id="email">
+									    <form:input path="email" cssClass="form-control"  id="email"/>
+									  	<form:errors path="email"></form:errors>
 									  </div>									  
 									  <div class="form-group">
 									    <label for="phone">Phone</label>
-									    <input type="text" class="form-control" name="phone" id="phone">
+									    <form:input path="phone" cssClass="form-control"  id="phone"/>
+									  	<form:errors path="phone"></form:errors>
 									  </div>									  
 									  <div class="form-group">
 									    <label for="birth">Birth</label>
-									    <input type="date" class="form-control" name="birth" id="birth">
+									    <form:input path="birth" type="date" class="form-control" id="birth"/>
+									  	<form:errors path="birth"></form:errors>
 									  </div>									  
 									  <div class="form-group">
 									  	<button type="button" id="fileAdd"  class="form-control btn btn-primary" >File Add</button>
@@ -79,7 +90,7 @@
 									  </div>
 									
 									  <button type="submit" class="btn btn-primary">Submit</button>
-									</form>
+									</form:form>
                                 </div>
                              </div>
                              

@@ -53,6 +53,7 @@ public class NoticeService implements BoardService {
 		//글번호가 필요
 		int result = noticeDAO.add(boardDTO);
 		
+
 		
 		if(attach == null) {
 			return result;
@@ -103,6 +104,8 @@ public class NoticeService implements BoardService {
 	@Override
 	public BoardFileDTO fileDetail(BoardFileDTO boardFileDTO) throws Exception {
 		// TODO Auto-generated method stub
+		
 		return noticeDAO.fileDetail(boardFileDTO);
 	}
+	
 }

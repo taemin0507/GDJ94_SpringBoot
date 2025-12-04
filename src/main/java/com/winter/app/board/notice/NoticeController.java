@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import com.winter.app.board.BoardDTO;
 import com.winter.app.board.BoardFileDTO;
 import com.winter.app.util.Pager;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -60,13 +62,19 @@ public class NoticeController {
 	}
 	
 	@GetMapping("add")
-	public String add()throws Exception{
+	public String add(@ModelAttribute("dto") NoticeDTO noticeDTO)throws Exception{
 		return "board/add";
 	}
 	
 	@PostMapping("add")
-	public String add(NoticeDTO noticeDTO, MultipartFile [] attach)throws Exception{
-		int result = noticeService.add(noticeDTO, attach);
+	public String add(@ModelAttribute("dto") @Valid NoticeDTO noticeDTO,BindingResult bindingResult ,MultipartFile [] attach)throws Exception{
+		
+		if(bindingResult.hasErrors()) {
+			
+			return "board/add";
+		}
+		
+		//int result = noticeService.add(noticeDTO, attach);
 		
 		return "redirect:./list";
 		
@@ -96,9 +104,9 @@ public class NoticeController {
 	}
 	
 	@GetMapping("fileDown")
-	public String fileDown(BoardFileDTO boardFileDTO,Model model) throws Exception{
+	public String fileDown(BoardFileDTO boardFileDTO, Model model)throws Exception{
 		boardFileDTO = noticeService.fileDetail(boardFileDTO);
-		model.addAttribute("file",boardFileDTO);
+		model.addAttribute("file", boardFileDTO);
 		return "fileDownView";
 	}
 	

@@ -15,9 +15,6 @@ public class FileManager {
 		return file.delete();
 	}
 	
-	
-	
-	
 	//TDD
 	public String fileSave(File file, MultipartFile f)throws Exception{
 		if(!file.exists()) {
