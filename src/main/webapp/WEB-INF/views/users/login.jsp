@@ -43,17 +43,26 @@
                                     <h6 class="m-0 font-weight-bold text-primary">${category}</h6>
                                 </div>
                                 <div class="card-body">
+                                	<div>
+                                		${param.message}
+                                	</div>
+                                
                                    <form method="post">
                                    	  
 									  <div class="form-group">
 									    <label for="writer">Username</label>
-									    <input type="text" class="form-control"  id="username" name="username">
+									    <input type="text" class="form-control" value="test"  id="username" name="username">
 									  </div>
 									  <div class="form-group">
 									    <label for="password">Password</label>
-									    <input type="password" class="form-control"  id="password" name="password">
-									  </div>									  
-									 
+									    <input type="password" class="form-control" value="anananan"  id="password" name="password">
+									  </div>
+									  
+									    <div class="form-group form-check">
+										    <input type="checkbox" name="rememberme" class="form-check-input" id="exampleCheck1">
+										    <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+										</div>									  
+																			 
 									
 									  <button type="submit" class="btn btn-primary">Submit</button>
 									</form>

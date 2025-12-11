@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +22,9 @@ public class UserService {
 	
 	@Value("${app.upload.user}")
 	private String uploadPath;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	public boolean getError(UserDTO userDTO, BindingResult bindingResult)throws Exception{
 		//check : true  -> 검증 실패, error 존재
@@ -50,7 +54,11 @@ public class UserService {
 	public int register(UserDTO userDTO, MultipartFile profile)throws Exception{
 		int result=0;
 		
+		userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+		
 		result = userDAO.register(userDTO);
+		
+		result = userDAO.roleAdd(userDTO);
 		
 		if(profile == null || profile.isEmpty()) {
 			return result;

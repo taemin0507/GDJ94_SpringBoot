@@ -1,6 +1,15 @@
 package com.winter.app.users;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -12,7 +21,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class UserDTO {
+public class UserDTO implements UserDetails, OAuth2User{
 	
 	@NotBlank(groups = {RegisterGroup.class})
 	private String username;
@@ -34,5 +43,39 @@ public class UserDTO {
 	@Past(groups = {RegisterGroup.class, UpdateGroup.class})
 	private LocalDate birth;
 	private UserFileDTO userFileDTO;
+	
+	private List<RoleDTO> roleDTOs;
+
+	//UserDetail
+	private boolean accountNonExpired;
+	private boolean accountNonLocked;
+	private boolean credentialsNonExpired;
+	private boolean enabled;
+	
+	
+	
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		List<GrantedAuthority> list= new ArrayList<>();
+		
+		for(int i=0;i<roleDTOs.size();i++) {
+			GrantedAuthority g = new SimpleGrantedAuthority(roleDTOs.get(i).getRoleName());
+			list.add(g);
+		}
+		
+		return list;
+	}
+
+
+
+	//OAuth2User
+	private Map<String, Object> attributes;
+	private String sns;
+	
+
+	
+	
 
 }
